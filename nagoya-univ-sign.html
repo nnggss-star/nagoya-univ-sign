@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta name="viewport" content="width=1100">
+    <meta charset="UTF-8">
+    <title>名古屋大学駅 LCD発車標 筐体統一版</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Noto+Sans+JP:wght@700;900&display=swap');
+
+        :root {
+            --lcd-bg: #00031a;
+            --meijo-purple: #4b0082;
+            --info-yellow: #fdf500;
+            --unit-width: 1200px;
+            --side-box-width: 120px; /* 番線エリアの幅を固定 */
+            --scroll-speed: 25s;
+        }
+
+        body {
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+
+        /* 筐体全体：角を大きく丸く設定 */
+        .display-unit {
+            width: var(--unit-width);
+            background: linear-gradient(180deg, #e5e5e5 0%, #b8b8b8 50%, #999 100%);
+            padding: 10px;
+            border-radius: 25px; /* image_c9b3c3風の丸み */
+            display: flex;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            box-sizing: border-box;
+        }
+
+        /* 番線エリア：サイズを1番2番で完全統一 */
+        .platform-box {
+            width: var(--side-box-width);
+            min-width: var(--side-box-width);
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-right: 3px solid #666;
+            margin-right: 12px;
+            border-radius: 18px 0 0 18px;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .p-num { 
+            font-size: 85px; /* 数字を大きく */
+            font-weight: 900; 
+            color: #111; 
+            line-height: 1; 
+            margin-bottom: 5px;
+        }
+
+        .p-label { 
+            font-size: 13px; 
+            font-weight: 900; 
+            color: #111; 
+            text-align: center; 
+            line-height: 1.4;
+        }
+
+        /* 液晶画面エリア */
+        .screen {
+            background-color: var(--lcd-bg);
+            flex-grow: 1;
+            border: 4px solid var(--meijo-purple);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-radius: 15px; 
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            height: 70px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding: 0 25px;
+        }
+
+        .time { width: 20%; font-size: 3rem; font-weight: 900; color: #fff; letter-spacing: 2px; }
+        .via  { width: 30%; font-size: 1.6rem; font-weight: 700; color: #aaa; text-align: center; }
+        .dest { width: 50%; font-size: 3rem; font-weight: 900; color: #fff; text-align: right; }
+
+        /* 接近表示：2段目に黄色文字 */
+        .approaching-text {
+            width: 100%;
+            text-align: left;
+            color: var(--info-yellow);
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        .footer {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .ticker {
+            flex-grow: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            color: var(--info-yellow);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .ticker-span { 
+            display: inline-block; 
+            animation: scroll-text var(--scroll-speed) linear infinite; 
+        }
+
+        .current-time {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-left: 30px;
+            min-width: 100px;
+            text-align: right;
+        }
+
+        @keyframes scroll-text { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+        .blink { animation: blink-anim 0.8s step-end infinite; }
+        @keyframes blink-anim { 50% { opacity: 0.1; } }
+    </style>
+</head>
+<body>
+
+<div class="display-unit">
+    <div class="platform-box">
+        <div class="p-num">1</div>
+        <div class="p-label">左まわり<br>Counter-<br>clockwise</div>
+    </div>
+    <div class="screen">
+        <div class="row" id="p1-r1"></div>
+        <div class="row" id="p1-r2"></div>
+        <div class="footer">
+            <div class="ticker"><span class="ticker-span">1番線は名城線左回り 本山・大曽根方面ゆきです。足元にご注意ください。</span></div>
+            <div class="current-time clock-val">--:--</div>
+        </div>
+    </div>
+</div>
+
+<div class="display-unit">
+    <div class="platform-box">
+        <div class="p-num">2</div>
+        <div class="p-label">右まわり<br>Clockwise</div>
+    </div>
+    <div class="screen">
+        <div class="row" id="p2-r1"></div>
+        <div class="row" id="p2-r2"></div>
+        <div class="footer">
+            <div class="ticker"><span class="ticker-span">2番線は右回り 八事・新瑞橋方面ゆきです。名城線をご利用いただきありがとうございます。</span></div>
+            <div class="current-time clock-val">--:--</div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 指定された時刻表・行き先データ
+const timetable = {
+    p1: {
+        weekday: { 5:[42,55], 6:[16,28,43,54], 7:[1,8,16,22,29,35,42,50,57], 8:[4,11,19,25,32,39,46,51,57], 9:[4,11,18,24,30,37,45,54], 10:[1,9,16,26,36,45,55], 11:[5,15,25,36,45,55], 12:[5,15,25,35,45,55], 13:[5,15,25,35,45,55], 14:[5,15,25,35,45,55], 15:[5,15,25,36,45,55], 16:[3,11,19,27,34,41,48,55], 17:[2,9,16,23,30,37,44,51,58], 18:[5,12,19,26,33,40,47,54], 19:[1,8,15,22,29,36,43,50,57], 20:[4,12,19,25,33,39,46,53], 21:[0,9,19,29,39,48,53], 22:[0,9,19,29,39,49,59], 23:[12,19,30,40,49], 0:[2,18] },
+        holiday: { 5:[42,55], 6:[17,29,43,55], 7:[8,18,29,39,49,59], 8:[9,19,29,39,49,59], 9:[9,19,29,39,49,59], 10:[9,19,29,39,49,59], 11:[9,19,29,39,49,59], 12:[9,19,29,39,49,59], 13:[9,19,29,39,49,59], 14:[9,19,29,39,49,59], 15:[9,19,29,39,49,59], 16:[9,19,29,39,49,59], 17:[9,19,29,39,49,59], 18:[9,19,29,39,49,59], 19:[9,19,29,39,49,59], 20:[9,19,29,39,49,59], 21:[9,19,29,39,49,59], 22:[9,19,29,39,49,59], 23:[12,19,30,40,49], 0:[2,18] }
+    },
+    p2: {
+        weekday: { 5:[30,46,58], 6:[9,20,30,38,46,52,58], 7:[5,12,20,26,32,38,43,49,55], 8:[1,7,13,20,26,33,39,46,54], 9:[2,10,18,27,37,47,57], 10:[7,17,27,37,47,57], 11:[7,17,27,37,47,57], 12:[7,17,27,37,47,57], 13:[7,17,27,37,47,57], 14:[7,17,27,37,47,57], 15:[7,17,27,36,47,54], 16:[1,8,15,22,29,36,43,50,57], 17:[4,11,18,25,32,39,46,53], 18:[0,7,14,21,28,35,42,49,56], 19:[3,10,17,24,31,38,45,52,59], 20:[6,13,20,28,34,41,49,55], 21:[0,9,16,21,28,34,40,50], 22:[0,10,20,30,40,50], 23:[0,10,20,30,40,55], 0:[10] },
+        holiday: { 5:[30,46,58], 6:[8,20,35,48], 7:[0,10,20,30,40,50], 8:[0,10,20,30,40,50], 9:[0,10,20,30,40,50], 10:[0,10,20,30,40,50], 11:[0,10,20,30,40,50], 12:[0,10,20,30,40,50], 13:[0,10,20,30,40,50], 14:[0,10,20,30,40,50], 15:[0,10,20,30,40,50], 16:[0,10,20,30,40,50], 17:[0,10,20,30,40,50], 18:[0,10,20,30,40,50], 19:[0,10,20,30,40,50], 20:[0,10,20,30,40,50], 21:[0,10,20,30,40,50], 22:[0,10,20,30,40,50], 23:[0,10,20,30,40,55], 0:[10] }
+    }
+};
+
+function getDest(pNum, dayType, h, m) {
+    if (pNum === 1) {
+        if (dayType === 'weekday' && ((h === 8 && m === 46) || (h === 21 && m === 53))) return "ナゴヤドーム前矢田";
+        const special = [{h:23,m:19}, {h:23,m:49}, {h:0,m:2}, {h:0,m:18}];
+        if (special.some(t => t.h === h && t.m === m)) return "ナゴヤドーム前矢田";
+        return "名城線左回り";
+    } else {
+        if (h === 23 && m === 55) return "金山";
+        if (h === 0 && m === 10) return "新瑞橋";
+        return "名城線右回り";
+    }
+}
+
+function update() {
+    const now = new Date();
+    const isHol = (now.getDay() === 0 || now.getDay() === 6);
+    const dayType = isHol ? 'holiday' : 'weekday';
+    const curH = now.getHours();
+    const curM = now.getMinutes();
+
+    document.querySelectorAll('.clock-val').forEach(c => c.innerText = `${curH.toString().padStart(2,'0')}:${curM.toString().padStart(2,'0')}`);
+
+    [1, 2].forEach(pNum => {
+        const sch = timetable[`p${pNum}`][dayType];
+        const via = pNum === 1 ? "大曽根・栄方面" : "八事・新瑞橋方面";
+        let list = [];
+        for (let i = 0; i < 24; i++) {
+            let ch = (curH + i) % 24;
+            if (sch[ch]) sch[ch].forEach(min => { if (i > 0 || min >= curM) list.push({h: ch, m: min}); });
+            if (list.length >= 2) break;
+        }
+
+        const r1 = document.getElementById(`p${pNum}-r1`);
+        const r2 = document.getElementById(`p${pNum}-r2`);
+
+        if (list[0]) {
+            const dest = getDest(pNum, dayType, list[0].h, list[0].m);
+            r1.innerHTML = `<div class="time">${list[0].h}:${list[0].m.toString().padStart(2,'0')}</div><div class="via">${via}</div><div class="dest">${dest}</div>`;
+        }
+        
+        if (list[0] && list[0].h === curH && list[0].m === curM) {
+            r2.innerHTML = `<div class="approaching-text blink">電車がまいります</div>`;
+        } else if (list[1]) {
+            const dest = getDest(pNum, dayType, list[1].h, list[1].m);
+            r2.innerHTML = `<div class="time">${list[1].h}:${list[1].m.toString().padStart(2,'0')}</div><div class="via">${via}</div><div class="dest">${dest}</div>`;
+        }
+    });
+}
+
+setInterval(update, 1000);
+update();
+</script>
+</body>
+</html>
