@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>材料工学 完全講義アーカイブ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 数式表示用のMathJaxを導入 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', 'Noto Sans JP', sans-serif; }
+        .sidebar-item { transition: all 0.2s; border-left: 3px solid transparent; }
+        .sidebar-item:hover { background-color: #f1f5f9; color: #1d4ed8; }
+        .sidebar-item.active { 
+            background-color: #eff6ff; 
+            color: #1d4ed8; 
+            border-left-color: #2563eb;
+            font-weight: 600;
+        }
+        .lecture-section { scroll-margin-top: 5rem; }
+        .formula-card {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+        }
+        .mineral-tag {
+            @apply px-2 py-1 rounded text-xs font-mono font-bold;
+        }
+        .placeholder-box {
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3Base%3E%3Cpath d='M5 0h1L0 6V5zm1 5v1H5z' fill='%2394a3b8' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 tex2jax_process">
+
+    <!-- Navbar -->
+    <header class="fixed top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold">ME</div>
+                <h1 class="font-bold text-xl tracking-tight">材料工学 <span class="text-blue-600">Archive</span></h1>
+            </div>
+            <div class="hidden sm:block text-sm font-medium text-slate-500">第2回 〜 第11回 講義まとめ</div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 pt-24 pb-12 flex flex-col md:flex-row gap-8">
+        
+        <!-- Sidebar Navigation -->
+        
+
+        <aside class="w-full md:w-72 shrink-0">
+            <div class="sticky top-24 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm 
+                        max-h-[calc(100vh-120px)] overflow-y-auto"> <p class="text-xs font-bold text-slate-400 uppercase tracking-widest px-3 mb-4">講義リスト</p>
+                <nav class="space-y-1" id="sidebar-nav">
+                    <a href="#lec02" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">02.</span> セメント・コンクリートとは
+                    </a>
+                    <a href="#lec03" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">03.</span> 組成と水和反応
+                    </a>
+                    <a href="#lec04" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">04.</span> 骨材の重要性と混和材料
+                    </a>
+                    <a href="#lec05" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">05.</span> 施工時のコンクリートの性能
+                    </a>
+                    <a href="#lec06" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">06.</span> 供用中のコンクリートの性能
+                    </a>
+                    <a href="#lec07" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">07.</span> セメント系材料の時間依存挙動
+                    </a>
+                    <a href="#lec08" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">08.</span> 補強材の種類と力学特性
+                    </a>
+                    <a href="#lec09" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">09.</span> コンクリートの耐久性と初期欠陥
+                    </a>
+                    <a href="#lec10" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">10.</span> コンクリートの耐久性：鋼材腐食・ASR
+                    </a>
+                    <a href="#lec11" class="sidebar-item flex items-center px-4 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50">
+                        <span class="w-8">11.</span> コンクリートの耐久性:劣化対策
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 space-y-20">
+
+            <!-- 第2回 講義 -->
+            <section id="lec02" class="lecture-section">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第2回</span>
+                    <h2 class="text-3xl font-bold text-slate-800">セメント、コンクリートとは？</h2>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-10">
+                    <!-- セメントのルーツ -->
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. セメントのルーツ</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            コンクリートのルーツは<b>石器時代（約9000年前）</b>に遡ります。ヨーロッパでは当時から床材などに使われていましたが、これらは「気中」で硬化する<b>気硬性コンクリート</b>でした。
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                            <div class="formula-card p-6 rounded-2xl">
+                                <h4 class="font-bold text-blue-800 mb-3 text-sm italic">気硬性コンクリートの化学工程</h4>
+                                <ul class="text-sm space-y-3 text-slate-700">
+                                    <li class="bg-white p-2 rounded border border-blue-50">
+                                        <span class="block text-[10px] text-blue-400 font-bold uppercase">焼成（石灰岩から生石灰へ）</span>
+                                        $CaCO_3 \rightarrow CaO + CO_2$
+                                    </li>
+                                    <li class="bg-white p-2 rounded border border-blue-50">
+                                        <span class="block text-[10px] text-blue-400 font-bold uppercase">消化（生石灰から消石灰へ）</span>
+                                        $CaO + H_2O \rightarrow Ca(OH)_2$
+                                    </li>
+                                    <li class="bg-white p-2 rounded border border-blue-50 font-bold text-blue-600">
+                                        <span class="block text-[10px] text-blue-400 font-bold uppercase">硬化（炭酸化反応）</span>
+                                        $Ca(OH)_2 + CO_2 \rightarrow CaCO_3 + H_2O$
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="p-4 bg-orange-50 rounded-xl border border-orange-100">
+                                    <h5 class="font-bold text-orange-800 text-sm mb-1">水硬性の発見</h5>
+                                    <p class="text-xs text-orange-700 leading-relaxed">
+                                        古代ローマ人は、石灰に<b>火山灰</b>を混ぜることで水中で硬化する「水硬性」を発見しました。これが現代に続くコンクリート技術の基礎となりました。
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                    <h5 class="font-bold text-slate-800 text-sm mb-1">近代セメントの誕生</h5>
+                                    <p class="text-xs text-slate-600 leading-relaxed">
+                                        1824年、ジョセフ・アスプディンが石灰石と粘土を焼成して「ポルトランドセメント」を発明。外観が英国のポルトランド島産の石材に似ていたことが名前の由来です。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- コンクリートの構成材料 -->
+                    <div class="space-y-4 pt-4 border-t border-slate-100">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. コンクリートの構成材料</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm italic">
+                            「コンクリートは石を安く固めた人工の石材である」
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-xl text-center border border-blue-100">
+                                <p class="text-xs text-blue-400 font-bold">糊（バインダー）</p>
+                                <p class="font-bold text-blue-800">セメント</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-xl text-center border border-blue-100">
+                                <p class="text-xs text-blue-400 font-bold">反応・流動性</p>
+                                <p class="font-bold text-blue-800">水</p>
+                            </div>
+                            <div class="bg-slate-100 p-4 rounded-xl text-center border border-slate-200">
+                                <p class="text-xs text-slate-400 font-bold">細骨材</p>
+                                <p class="font-bold text-slate-800">砂</p>
+                            </div>
+                            <div class="bg-slate-100 p-4 rounded-xl text-center border border-slate-200">
+                                <p class="text-xs text-slate-400 font-bold">粗骨材</p>
+                                <p class="font-bold text-slate-800">砂利・砕石</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 text-white p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-center">
+                            <div class="flex-1">
+                                <h4 class="text-sm font-bold text-blue-400 mb-2 uppercase tracking-widest">容積比のルール</h4>
+                                <p class="text-xs leading-relaxed text-slate-300">
+                                    コンクリートの約<b>70%</b>は骨材（砂・石）で占められます。セメントペースト（セメント+水）はわずか30%程度です。高価なセメントを減らし、安価な骨材をいかに詰め込むかが経済性のポイントです。
+                                </p>
+                            </div>
+                            <div class="w-32 h-32 rounded-full border-8 border-slate-700 flex items-center justify-center relative">
+                                <div class="absolute inset-0 rounded-full border-8 border-blue-500" style="clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);"></div>
+                                <div class="text-center">
+                                    <p class="text-[10px] text-slate-400 uppercase">Paste</p>
+                                    <p class="text-xl font-bold">30%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- アシュビー図 -->
+                    <div class="space-y-4 pt-4 border-t border-slate-100">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">3. 建設材料としての性能（アシュビー図）</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">
+                            建設材料の選定において、ヤング係数（剛性）と密度の関係は極めて重要です。
+                        </p>
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-blue-600 w-2 h-6 rounded-full"></div>
+                                <h4 class="font-bold text-slate-800">剛性 vs 密度・コスト</h4>
+                            </div>
+                            <ul class="text-xs text-slate-600 space-y-2 list-disc pl-5">
+                                <li><b>セラミックスとしての特性：</b> コンクリートは石材やレンガと同様に、高い剛性を持ちつつも引張に弱い脆性材料に分類されます。</li>
+                                <li><b>圧倒的な経済性：</b> 「ヤング係数 ÷ コスト/体積」の指標において、コンクリートは他の工業材料（金属、合成樹脂）を圧倒し、最も効率的に空間を構築できる材料です。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第3回 講義 -->
+            <section id="lec03" class="lecture-section">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第3回</span>
+                    <h2 class="text-3xl font-bold text-slate-800">組成と水和反応</h2>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+                    
+                    <!-- 1. 製造工程 -->
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. セメントの製造工程</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                                <p class="text-xs font-bold text-orange-600 mb-2">① 原料工程</p>
+                                <p class="text-[11px] text-slate-600">石灰石、粘土などを粉砕・混合。近年は廃棄物も原料として活用。</p>
+                            </div>
+                            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                                <p class="text-xs font-bold text-blue-600 mb-2">② 焼成工程</p>
+                                <p class="text-[11px] text-slate-600"><b>ロータリーキルン</b>内で1450℃まで加熱。中間製品「<b>クリンカ</b>」の誕生。</p>
+                            </div>
+                            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                                <p class="text-xs font-bold text-green-600 mb-2">③ 仕上げ工程</p>
+                                <p class="text-[11px] text-slate-600">クリンカに<b>石こう</b>を加え粉砕。石こうは凝結時間を調整するために必須。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. ポルトランドセメントの鉱物組成 -->
+                    <div class="space-y-6 pt-4 border-t border-slate-100">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. 4大主要鉱物</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead class="bg-slate-50 text-slate-600 font-bold">
+                                    <tr>
+                                        <th class="p-4 text-left">名称</th>
+                                        <th class="p-4 text-left">化学式</th>
+                                        <th class="p-4 text-left">略記</th>
+                                        <th class="p-4 text-left">呼称</th>
+                                        <th class="p-4 text-left">役割</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 text-slate-700">
+                                    <tr>
+                                        <td class="p-4">Tricalcium Silicate</td>
+                                        <td class="p-4 font-mono">$3CaO \cdot SiO_2$</td>
+                                        <td class="p-4"><span class="mineral-tag bg-blue-100 text-blue-700">C3S</span></td>
+                                        <td class="p-4">Alite</td>
+                                        <td class="p-4 text-xs">初期強度の発現。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4">Dicalcium Silicate</td>
+                                        <td class="p-4 font-mono">$2CaO \cdot SiO_2$</td>
+                                        <td class="p-4"><span class="mineral-tag bg-green-100 text-green-700">C2S</span></td>
+                                        <td class="p-4">Belite</td>
+                                        <td class="p-4 text-xs">長期強度の増進。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4">Tricalcium Aluminate</td>
+                                        <td class="p-4 font-mono">$3CaO \cdot Al_2O_3$</td>
+                                        <td class="p-4"><span class="mineral-tag bg-red-100 text-red-700">C3A</span></td>
+                                        <td class="p-4">Aluminate</td>
+                                        <td class="p-4 text-xs">反応が非常に速い。</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4">Tetracalcium Aluminoferrite</td>
+                                        <td class="p-4 font-mono">$4CaO \cdot Al_2O_3 \cdot Fe_2O_3$</td>
+                                        <td class="p-4"><span class="mineral-tag bg-slate-200 text-slate-700">C4AF</span></td>
+                                        <td class="p-4">Ferrite</td>
+                                        <td class="p-4 text-xs">耐食性。</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 3. 水和反応 -->
+                    <div class="space-y-6 pt-4 border-t border-slate-100">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">3. 水和反応のメカニズム</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-4">
+                                <h4 class="text-sm font-bold text-slate-700">主要な生成物</h4>
+                                <div class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                                    <p class="text-xs font-bold text-blue-600">C-S-Hゲル ($xCaO \cdot ySiO_2 \cdot zH_2O$)</p>
+                                    <p class="text-[11px] text-slate-600 mt-1">セメントが固まる主役。極めて微細な繊維状の組織で、強度を発現します。</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-xl border border-green-100">
+                                    <p class="text-xs font-bold text-green-600">水酸化カルシウム ($Ca(OH)_2$)</p>
+                                    <p class="text-[11px] text-slate-600 mt-1">コンクリートを強アルカリ性に保ち、中の鉄筋の錆びを防ぎます。</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-sm font-bold text-slate-700">セメントの種類別組成比 (%)</h4>
+                                <div class="bg-slate-900 rounded-xl p-4 text-[10px] font-mono text-slate-300">
+                                    <div class="flex justify-between border-b border-slate-700 pb-1 mb-2">
+                                        <span>Type</span><span>C3S</span><span>C2S</span><span>C3A</span>
+                                    </div>
+                                    <div class="flex justify-between py-1">
+                                        <span class="text-white">普通 (Normal)</span><span>53</span><span>21</span><span>9</span>
+                                    </div>
+                                    <div class="flex justify-between py-1">
+                                        <span class="text-orange-400">早強 (High-Early)</span><span>64</span><span>10</span><span>9</span>
+                                    </div>
+                                    <div class="flex justify-between py-1">
+                                        <span class="text-green-400">中庸熱 (Moderate)</span><span>41</span><span>37</span><span>4</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 第4回 強化版 -->
+            <section id="lec04" class="lecture-section">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第4回</span>
+                    <h2 class="text-3xl font-bold text-slate-800">骨材の重要性と混和材料</h2>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+                    
+                    <!-- 1. 骨材の性質（密度・吸水率） -->
+                    <div class="space-y-6">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. 骨材の密度・吸水率の計算</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="formula-card p-6 rounded-2xl">
+                                <h4 class="font-bold text-blue-800 mb-4 text-sm">密度の定義</h4>
+                                <div class="space-y-2">
+                                    <p class="text-xs"><b>表乾密度 $\rho_s$:</b> $W_s / V$</p>
+                                    <p class="text-[10px] text-slate-500">※配合設計の基準。内部空隙が水で満たされ、表面は乾いた状態の質量を用いる。</p>
+                                </div>
+                            </div>
+                            <div class="formula-card p-6 rounded-2xl">
+                                <h4 class="font-bold text-blue-800 mb-4 text-sm">吸水率 $Q$</h4>
+                                <p class="text-sm">$Q = \frac{W_s - W_d}{W_d} \times 100 \ (\%)$</p>
+                                <p class="text-[10px] text-slate-500 mt-2">骨材がどれだけ水を吸うかを示す指標。品質管理に必須。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 化学混和剤（AE剤・減水剤） -->
+                    <div class="space-y-6 pt-4 border-t border-slate-100">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. 化学混和剤のメカニズム</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="mechanism-box border-blue-100 bg-blue-50/30">
+                                <h4 class="font-bold text-blue-700 text-sm">ボールベアリング作用 (AE剤)</h4>
+                                <p class="text-xs text-slate-600 mt-2">
+                                    微細な独立気泡（10-100μm）がコンクリート内で潤滑剤として働き、ワーカビリティを向上させます。
+                                </p>
+                            </div>
+                            <div class="mechanism-box border-green-100 bg-green-50/30">
+                                <h4 class="font-bold text-green-700 text-sm">分散作用 (減水剤)</h4>
+                                <p class="text-xs text-slate-600 mt-2">
+                                    セメント粒子表面に吸着し、<b>電気的反発</b>や<b>立体障害</b>によってフロック（凝集）を解体、閉じ込められた水を解放します。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 混和材の反応メカニズム（ポゾラン反応・潜在水硬性） -->
+                    <div class="space-y-8 pt-4 border-t border-slate-100">
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">3. 混和材の特殊反応メカニズム</h3>
+                        
+                        <!-- ポゾラン反応 -->
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded">フライアッシュ等</span>
+                                <h4 class="font-bold text-slate-800">ポゾラン反応 (Pozzolanic Reaction)</h4>
+                            </div>
+                            <div class="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100">
+                                <p class="text-xs text-slate-700 leading-relaxed mb-4">
+                                    それ自体には水硬性はないが、セメントの水和によって生じた<span class="important-term">水酸化カルシウム $Ca(OH)_2$</span>と反応し、長期的に安定した水和物を作る性質です。
+                                </p>
+                                <div class="bg-white p-4 rounded-xl border border-indigo-200">
+                                    <p class="text-[10px] font-bold text-indigo-500 uppercase mb-2">反応式イメージ</p>
+                                    <p class="text-sm font-mono text-center">
+                                        $SiO_2 \text{(ポゾラン)} + Ca(OH)_2 + H_2O \rightarrow C\text{-}S\text{-}H \text{(ケイ酸カルシウム水和物)}$
+                                    </p>
+                                </div>
+                                <ul class="text-[11px] text-indigo-900 mt-4 space-y-1 list-disc pl-5">
+                                    <li><b>メリット：</b> 組織が緻密になり、長期強度が向上する。</li>
+                                    <li><b>メリット：</b> 発熱速度（水和熱）が抑制される。</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 潜在水硬性 -->
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-teal-600 text-white text-[10px] px-2 py-0.5 rounded">高炉スラグ微粉末</span>
+                                <h4 class="font-bold text-slate-800">潜在水硬性 (Latent Hydraulicity)</h4>
+                            </div>
+                            <div class="bg-teal-50/50 p-6 rounded-2xl border border-teal-100">
+                                <p class="text-xs text-slate-700 leading-relaxed mb-4">
+                                    水と接触しただけでは表面に膜ができて反応が進みにくいが、<span class="important-term">アルカリ刺激</span>（セメント水和物中の $Ca(OH)_2$ や硫酸塩など）を受けることで硬化を開始する性質です。
+                                </p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-white p-4 rounded-xl border border-teal-200 text-center">
+                                        <p class="text-[10px] font-bold text-teal-600 uppercase mb-1">刺激剤</p>
+                                        <p class="text-xs">$Ca(OH)_2$ (アルカリ性)</p>
+                                        <p class="text-xs">$CaSO_4$ (硫酸塩)</p>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-xl border border-teal-200 text-center">
+                                        <p class="text-[10px] font-bold text-teal-600 uppercase mb-1">特徴</p>
+                                        <p class="text-xs font-bold">塩分遮断性が非常に高い</p>
+                                        <p class="text-[10px] text-slate-500">（海水の影響を受ける構造物に有効）</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 混和材のまとめ表 -->
+                        <div class="overflow-x-auto mt-6">
+                            <table class="w-full text-xs text-left">
+                                <thead class="bg-slate-100 border-b border-slate-200">
+                                    <tr>
+                                        <th class="p-3">混和材の種類</th>
+                                        <th class="p-3">主要な反応</th>
+                                        <th class="p-3">粒子形状の効果</th>
+                                        <th class="p-3">主な用途</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 text-slate-600 bg-white">
+                                    <tr>
+                                        <td class="p-3 font-bold">フライアッシュ (FA)</td>
+                                        <td class="p-3 text-indigo-600">ポゾラン反応</td>
+                                        <td class="p-3">球形（流動性アップ）</td>
+                                        <td class="p-3">ダム、大規模土木、水和熱抑制</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold">高炉スラグ微粉末</td>
+                                        <td class="p-3 text-teal-600">潜在水硬性</td>
+                                        <td class="p-3">角張（粗い）</td>
+                                        <td class="p-3">港湾構造物、地下構造物</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-bold">シリカフューム (SF)</td>
+                                        <td class="p-3 text-indigo-600">ポゾラン反応（強力）</td>
+                                        <td class="p-3">超微粒子（充填効果）</td>
+                                        <td class="p-3">高強度コンクリート、超高層ビル</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 第5回：詳細セクション -->
+            <section id="lec05" class="lecture-section">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第5回</span>
+                    <h2 class="text-3xl font-bold text-slate-800">施工時のコンクリートの性能</h2>
+                </div>
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+                    
+                    
+                    <div class="space-y-12">
+                        <!-- セクション1：定義と全体フロー -->
+                        <div>
+                            <h3 class="text-lg font-bold border-l-4 border-blue-600 pl-4 text-slate-800 mb-6">1. 施工段階における品質管理</h3>
+                            <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+                                フレッシュコンクリートは、練混ぜから硬化（物理的強度の発現）までの状態を指します。この期間の品質は、<b>「運搬・打設・締固め」</b>という一連の施工性能に依存します。
+                            </p>
+                            <div class="max-w-2xl mx-auto space-y-2">
+                                <div class="process-step">
+                                    <h4 class="text-sm font-bold">配合設計と材料計測</h4>
+                                    <p class="text-xs text-slate-500">用途に応じた強度とワーカビリティを算出し、厳密に重量計測を行う。</p>
+                                </div>
+                                <div class="process-step">
+                                    <h4 class="text-sm font-bold">輸送（生コン車）</h4>
+                                    <p class="text-xs text-slate-500">JIS規格では「練混ぜから荷卸しまで90分以内」が原則。スランプの経時変化を考慮する。</p>
+                                </div>
+                                <div class="process-step">
+                                    <h4 class="text-sm font-bold">打込みと締固め</h4>
+                                    <p class="text-xs text-slate-500">高いところからの自由落下を避け（材料分離防止）、バイブレータで空隙をなくす。</p>
+                                </div>
+                                <div class="process-step">
+                                    <h4 class="text-sm font-bold">仕上げと養生</h4>
+                                    <p class="text-xs text-slate-500">表面をコテで整え、初期の水和反応に必要な温度・湿度を確保する（湿潤養生）。</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- セクション2：ワーカビリティと試験 -->
+                        <div class="pt-8 border-t border-slate-100">
+                            <h3 class="text-lg font-bold border-l-4 border-blue-600 pl-4 text-slate-800 mb-6">2. ワーカビリティの評価項目</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="mechanism-box border-blue-100">
+                                    <h4 class="font-bold text-blue-700 text-sm mb-3 underline">コンシステンシー（流動性）</h4>
+                                    <p class="text-xs text-slate-600 mb-3">変形のしやすさ。主に<b>スランプ試験</b>で評価します。</p>
+                                    <div class="bg-blue-50 p-3 rounded-lg text-[11px] text-blue-800">
+                                        <b>判定基準：</b> スランプ値が大きいほど柔らかく、ポンプ圧送が容易になるが、水のやりすぎ（高W/C）は強度低下を招く。
+                                    </div>
+                                </div>
+                                <div class="mechanism-box border-green-100">
+                                    <h4 class="font-bold text-green-700 text-sm mb-3 underline">材料分離抵抗性</h4>
+                                    <p class="text-xs text-slate-600 mb-3">セメントペーストと骨材が分離せずに一体性を保つ能力。</p>
+                                    <div class="bg-green-50 p-3 rounded-lg text-[11px] text-green-800">
+                                        <b>ブリーディング：</b> コンクリート表面に水が浮き上がる現象。これが過度だと、鉄筋の下に空隙ができたり、表面が脆くなる。
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 formula-card p-5 rounded-xl">
+                                <h4 class="text-xs font-bold text-blue-600 mb-2">空気量試験の重要性</h4>
+                                <p class="text-xs text-slate-700 leading-relaxed">
+                                    コンクリート中の空気量は通常 <b>4.5% ± 1.5%</b> で管理されます。
+                                    <br>・空気が少ない：耐凍害性が低下し、冬場にひび割れやすい。
+                                    <br>・空気が多すぎる：強度が低下する（空気量1%増につき、圧縮強度は約4〜6%低下）。
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- セクション3：凝結と施工上の重要事項 -->
+                        <div class="pt-8 border-t border-slate-100">
+                            <h3 class="text-lg font-bold border-l-4 border-blue-600 pl-4 text-slate-800 mb-6">3. 凝結特性と「打ち重ね」のメカニズム</h3>
+                            <div class="space-y-6">
+                                <div class="bg-amber-50 rounded-2xl p-6 border border-amber-200">
+                                    <h4 class="text-sm font-bold text-amber-900 mb-4">凝結とは何か？</h4>
+                                    <p class="text-xs text-slate-700 leading-relaxed">
+                                        凝結とは、セメント材料が初期の流動性を失いながら、貫入抵抗を増していく現象です。
+                                        <br><span class="highlight-red">温度の影響：</span> 夏季は反応が加速し、始結・終結ともに早まるため、施工を急ぐ必要があります。
+                                    </p>
+                                </div>
+
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                    <div class="space-y-4">
+                                        <h4 class="text-sm font-bold flex items-center gap-2">
+                                            <span class="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-[10px]">!</span>
+                                            コールドジョイントの発生
+                                        </h4>
+                                        <p class="text-xs text-slate-600 leading-relaxed">
+                                            巨大な橋脚などは数層に分けて打設（打ち重ね）します。1層目のコンクリートの凝結が進みすぎた後に2層目を打つと、層間に<span class="highlight-red">一体性のない不連続面（コールドジョイント）</span>が発生します。
+                                        </p>
+                                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                                            <p class="text-[11px] font-bold mb-1">物理的リスク：</p>
+                                            <ul class="text-[10px] text-slate-500 list-disc pl-4">
+                                                <li>漏水の原因（水密性の欠如）</li>
+                                                <li>構造的な弱点（剪断力の伝達不良）</li>
+                                                <li>鉄筋腐食の加速（有害物質の浸入路）</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <h4 class="text-sm font-bold flex items-center gap-2 text-blue-700">
+                                            <span class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-[10px]">✓</span>
+                                            対策と施工処理
+                                        </h4>
+                                        <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 space-y-3">
+                                            <div>
+                                                <p class="text-[11px] font-bold text-blue-800">凝結遅延剤の利用</p>
+                                                <p class="text-[10px] text-slate-600">打継ぎ目に塗布し、表面の硬化をわざと遅らせる。</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-[11px] font-bold text-blue-800">チッピング（目荒らし）</p>
+                                                <p class="text-[10px] text-slate-600">表面のペーストを除去し、粗骨材を露出させる。2層目との物理的噛み合わせを強化する。</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-[11px] font-bold text-blue-800">型枠の側圧管理</p>
+                                                <p class="text-[10px] text-slate-600">1層目が軟らかすぎると2層目の重みで型枠が孕む（はらむ）ため、凝結の進行具合を現場で慎重に判断する。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section id="lec06" class="lecture-section">
+
+                <div class="flex items-center gap-3 mb-6">
+
+                    <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第6回</span>
+
+                    <h2 class="text-3xl font-bold text-slate-800">硬化コンクリートの性質と耐久性</h2>
+
+                </div>
+
+                
+
+                <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+
+                    
+
+                    <div class="space-y-6">
+
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. 力学的性質：強度の定義と変形挙動</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <div class="formula-card p-6 rounded-2xl">
+
+                                <h4 class="font-bold text-blue-800 mb-4 text-sm">強度の定義</h4>
+
+                                <div class="space-y-2">
+
+                                    <p class="text-xs"><b>強度 (MPa):</b> 最大荷重 / 断面積</p>
+
+                                    <p class="text-[10px] text-slate-500">※寸法や形状に依存しない材料固有の指標。一般に「強度」といえば圧縮強度を指す。</p>
+
+                                    <p class="text-xs mt-2"><b>試験体の寸法効果:</b> 試験体が大きくなるほど内部欠陥の確率が増え、見かけの強度は低下する。</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="formula-card p-6 rounded-2xl">
+
+                                <h4 class="font-bold text-blue-800 mb-4 text-sm">弾性係数とポアソン比</h4>
+
+                                <p class="text-xs"><b>ヤング係数 $E_c$:</b> 応力とひずみの比例定数。高強度ほど大きい。</p>
+
+                                <p class="text-xs"><b>ポアソン比 $\nu$:</b> 横ひずみ / 縦ひずみ（通常 0.18〜0.22 程度）。</p>
+
+                                <p class="text-[10px] text-slate-500 mt-2">マイクロクラックが進展すると、体積膨張（ダイラタンシー）により見かけのポアソン比が増大する。</p>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+
+                            <h4 class="text-sm font-bold text-slate-700 mb-3">圧縮強度に対する各強度の目安</h4>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+
+                                <div class="bg-white p-3 rounded-xl border border-slate-200">
+
+                                    <p class="text-[10px] text-slate-500">引張強度 $f_t$</p>
+
+                                    <p class="font-bold text-blue-600">1/10 〜 1/13</p>
+
+                                </div>
+
+                                <div class="bg-white p-3 rounded-xl border border-slate-200">
+
+                                    <p class="text-[10px] text-slate-500">曲げ強度 $f_b$</p>
+
+                                    <p class="font-bold text-blue-600">1/5 〜 1/8</p>
+
+                                </div>
+
+                                <div class="bg-white p-3 rounded-xl border border-slate-200">
+
+                                    <p class="text-[10px] text-slate-500">せん断強度 $f_s$</p>
+
+                                    <p class="font-bold text-blue-600">1/4 〜 1/7</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="space-y-6 pt-4 border-t border-slate-100">
+
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. 体積変化のメカニズム</h3>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                            <div class="mechanism-box border-orange-100 bg-orange-50/30">
+
+                                <h4 class="font-bold text-orange-700 text-sm">クリープ (Creep)</h4>
+
+                                <p class="text-xs text-slate-600 mt-2">
+
+                                    持続荷重によって、時間の経過とともにひずみが増大する現象。
+
+                                </p>
+
+                                <ul class="text-[10px] text-orange-900 mt-2 list-disc pl-4">
+
+                                    <li><b>要因：</b> C-S-H層間の水の移動、微細な結晶の再配列。</li>
+
+                                    <li><b>影響：</b> 部材のたわみ増大、プレストレストコンクリートの応力減少。</li>
+
+                                </ul>
+
+                            </div>
+
+                            <div class="mechanism-box border-blue-100 bg-blue-50/30">
+
+                                <h4 class="font-bold text-blue-700 text-sm">乾燥収縮 (Drying Shrinkage)</h4>
+
+                                <p class="text-xs text-slate-600 mt-2">
+
+                                    硬化後のコンクリートから水分が蒸発することで体積が減少する現象。
+
+                                </p>
+
+                                <ul class="text-[10px] text-blue-900 mt-2 list-disc pl-4">
+
+                                    <li><b>要因：</b> 毛細管張力の増大、吸着水の消失。</li>
+
+                                    <li><b>影響：</b> 拘束を受けると「ひび割れ」の最大原因となる。</li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="space-y-8 pt-4 border-t border-slate-100">
+
+                        <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">3. 耐久性と物質移動</h3>
+
+                        
+
+                        <div class="space-y-4">
+
+                            <div class="flex items-center gap-2">
+
+                                <span class="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded">劣化の起点</span>
+
+                                <h4 class="font-bold text-slate-800">物質移動抵抗性</h4>
+
+                            </div>
+
+                            <div class="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100">
+
+                                <p class="text-xs text-slate-700 leading-relaxed">
+
+                                    コンクリートの劣化は、外部から水、酸素、塩化物イオン、二酸化炭素などが浸入することで進行します。これらは主に「細孔構造（ポア）」を通じて移動します。
+
+                                </p>
+
+                                <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                                    <div class="bg-white p-3 rounded-xl border border-indigo-200">
+
+                                        <p class="text-[10px] font-bold text-indigo-500 uppercase">拡散 (Diffusion)</p>
+
+                                        <p class="text-[11px]">濃度勾配を原動力とする移動（塩害など）。</p>
+
+                                    </div>
+
+                                    <div class="bg-white p-3 rounded-xl border border-indigo-200">
+
+                                        <p class="text-[10px] font-bold text-indigo-500 uppercase">透水 (Permeation)</p>
+
+                                        <p class="text-[11px]">圧力勾配を原動力とする水の移動。</p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="space-y-4">
+
+                            <div class="flex items-center gap-2">
+
+                                <span class="bg-teal-600 text-white text-[10px] px-2 py-0.5 rounded">代表的劣化</span>
+
+                                <h4 class="font-bold text-slate-800">中性化と塩害</h4>
+
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                <div class="bg-teal-50/50 p-4 rounded-2xl border border-teal-100">
+
+                                    <h5 class="text-xs font-bold text-teal-700 mb-2">中性化 (Carbonation)</h5>
+
+                                    <p class="text-[10px] leading-relaxed">空気中の $CO_2$ が浸入し、鋼材を保護するアルカリ性を失わせる現象。$Ca(OH)_2 + CO_2 \rightarrow CaCO_3 + H_2O$</p>
+
+                                </div>
+
+                                <div class="bg-teal-50/50 p-4 rounded-2xl border border-teal-100">
+
+                                    <h5 class="text-xs font-bold text-teal-700 mb-2">塩害 (Chloride Damage)</h5>
+
+                                    <p class="text-[10px] leading-relaxed">外部からの塩化物イオンが鋼材位置に達し、不動態被膜を破壊して鉄筋を腐食させる現象。</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="overflow-x-auto mt-6">
+
+                            <table class="w-full text-xs text-left">
+
+                                <thead class="bg-slate-100 border-b border-slate-200">
+
+                                    <tr>
+
+                                        <th class="p-3">性能項目</th>
+
+                                        <th class="p-3">支配要因</th>
+
+                                        <th class="p-3">主な試験方法・指標</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody class="divide-y divide-slate-100 text-slate-600 bg-white">
+
+                                    <tr>
+
+                                        <td class="p-3 font-bold">圧縮強度</td>
+
+                                        <td class="p-3">水セメント比 (W/C)、養生温度</td>
+
+                                        <td class="p-3">円柱供試体（φ10×20cm）</td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td class="p-3 font-bold">変形性能</td>
+
+                                        <td class="p-3">骨材の弾性、マイクロクラック</td>
+
+                                        <td class="p-3">静弾性係数試験（割線弾性係数）</td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <td class="p-3 font-bold">耐久性</td>
+
+                                        <td class="p-3">細孔径分布、かぶり厚さ</td>
+
+                                        <td class="p-3">中性化深さ、塩化物イオン拡散係数</td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+            <!-- 第7回 強化版 -->
+        <section id="lec07" class="lecture-section">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第7回</span>
+                <h2 class="text-3xl font-bold text-slate-800">セメント系材料の時間依存挙動</h2>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+                
+                <!-- 導入 -->
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        コンクリート構造物は50年、100年という長期の耐用年数が求められます。荷重が一定でも時間とともに変形が増大する「クリープ」や、水分の消失に伴う「収縮」を理解することは、構造物のひび割れ抑制や耐久性確保において極めて重要です。
+                    </p>
+                </div>
+
+                <!-- 1. クリープ (Creep) -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. クリープ（持続荷重による塑性変形）</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="space-y-4 text-sm">
+                            <p class="leading-relaxed">
+                                コンクリートに一定の荷重を継続して載荷すると、瞬時の弾性変形 $\epsilon_e$ の後、時間とともにひずみが徐々に増大します。これを<span class="important-term">クリープひずみ $\epsilon_{cc}$</span>と呼びます。
+                            </p>
+                            <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                                <p class="font-bold text-blue-800 mb-2 text-xs">クリープ係数 $\phi$ の定義</p>
+                                <p class="text-lg font-mono text-center mb-2">$\phi = \frac{\epsilon_{cc}}{\epsilon_e}$</p>
+                                <p class="text-[10px] text-slate-500">※クリープひずみが弾性ひずみの何倍かを示す指標。</p>
+                            </div>
+                            <ul class="list-disc pl-5 space-y-1 text-xs text-slate-600">
+                                <li><b>除荷後の挙動：</b> 荷重を取り除くと瞬時に弾性回復し、その後ゆっくりと「遅れ弾性回復」が生じますが、一部は「永久変形」として残ります。</li>
+                                <li><b>影響因子：</b> 載荷時の材齢が若いほど、また周囲の湿度が低いほどクリープは大きくなります。</li>
+                            </ul>
+                        </div>
+                        <div class="mechanism-box bg-slate-50 flex flex-col justify-center items-center p-8">
+                            <p class="text-xs font-bold text-slate-400 mb-4 uppercase">Conceptual Graph</p>
+                            <div class="w-full h-40 border-l-2 border-b-2 border-slate-300 relative">
+                                <!-- 簡易的なクリープ曲線グラフ -->
+                                <svg class="w-full h-full" viewBox="0 0 200 100">
+                                    <path d="M 0 100 L 0 70 Q 50 40 150 30" fill="none" stroke="#2563eb" stroke-width="2" />
+                                    <line x1="0" y1="70" x2="150" y2="70" stroke="#cbd5e1" stroke-dasharray="4" />
+                                    <text x="155" y="35" font-size="8" fill="#2563eb">Total strain ($\epsilon$)</text>
+                                    <text x="5" y="65" font-size="8" fill="#94a3b8">Elastic strain ($\epsilon_e$)</text>
+                                    <text x="80" y="55" font-size="8" fill="#2563eb">Creep ($\epsilon_{cc}$)</text>
+                                </svg>
+                                <p class="absolute bottom-[-20px] right-0 text-[10px]">Time ($t$)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 乾燥収縮 (Drying Shrinkage) -->
+                <div class="space-y-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. 乾燥収縮とC-S-Hのメカニズム</h3>
+                    <div class="space-y-4">
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            硬化したコンクリートが乾燥環境に置かれ、内部の水分が失われることで生じる体積減少です。これは単なる水分の消失だけでなく、セメント水和物の主体である<span class="important-term">C-S-Hゲル</span>の構造変化が深く関わっています。
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="mechanism-box border-blue-100 bg-blue-50/20">
+                                <h4 class="font-bold text-blue-700 text-sm">毛細管張力</h4>
+                                <p class="text-[11px] text-slate-600 mt-2">空隙内の水が蒸発する際、メニスカス（凹面）が形成され、空隙壁を引き寄せる張力が発生します。</p>
+                            </div>
+                            <div class="mechanism-box border-indigo-100 bg-indigo-50/20">
+                                <h4 class="font-bold text-indigo-700 text-sm">表面エネルギーの変化</h4>
+                                <p class="text-[11px] text-slate-600 mt-2">C-S-H表面の吸着水が失われることで、固体表面のエネルギー状態が変化し、収縮を引き起こします。</p>
+                            </div>
+                            <div class="mechanism-box border-teal-100 bg-teal-50/20">
+                                <h4 class="font-bold text-teal-700 text-sm">層間水の脱離</h4>
+                                <p class="text-[11px] text-slate-600 mt-2">C-S-Hの層間に存在する水（層間水）が抜けることで、層構造自体が密密化（コンソリデーション）し収縮します。</p>
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 p-5 rounded-xl border border-amber-200">
+                            <h4 class="text-xs font-bold text-amber-800 mb-2">※自己収縮 (Autogenous Shrinkage) との違い</h4>
+                            <p class="text-[11px] text-slate-700 leading-relaxed">
+                                外部との水分のやり取りがなくても、<span class="highlight-red">水和反応による水の消費</span>だけで内部湿度が低下し、収縮が生じる現象です。水セメント比（W/C）の小さい<b>高強度コンクリート</b>で特に顕著になります。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 温度変化と拘束によるひび割れ -->
+                <div class="space-y-8 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">3. 温度変化と拘束の影響</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <span class="p-1 bg-slate-100 rounded">📏</span> 線膨張係数
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                コンクリートの熱膨張係数は約 $7\sim13 \times 10^{-6} /^\circ\text{C}$ です。これは<span class="highlight-blue">鉄筋の熱膨張係数とほぼ等しい</span>ため、温度変化を受けても両者の間に過大な応力が発生せず、鉄筋コンクリート(RC)としての性能が維持されます。
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <span class="p-1 bg-red-50 rounded">⚠️</span> 拘束条件とひび割れ
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                収縮が生じても、自由に動ける状態（拘束なし）であればひび割れは起きません。しかし、基礎や他部材によって変形が制限される（<span class="highlight-red">外部拘束</span>）、あるいは部材内部の温度差や湿度差によって変形が妨げられる（<span class="highlight-red">内部拘束</span>）と、引張応力が発生し、コンクリートの引張強度を超えた時にひび割れが発生します。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- まとめ図解 -->
+                    <div class="bg-slate-900 rounded-2xl p-6 text-white overflow-hidden relative">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl font-bold italic">RESTRAINT</div>
+                        <h4 class="text-sm font-bold mb-4 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                            体積変化・拘束・応力の関係
+                        </h4>
+                        <div class="flex flex-col md:flex-row justify-around items-center gap-6 text-center">
+                            <div class="space-y-2">
+                                <div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
+                                    <span class="text-xs">収縮原因</span>
+                                </div>
+                                <p class="text-[10px] text-slate-400">乾燥・温度低下<br>自己収縮</p>
+                            </div>
+                            <div class="text-2xl text-slate-600">＋</div>
+                            <div class="space-y-2">
+                                <div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 text-red-400">
+                                    <span class="text-xs">拘束</span>
+                                </div>
+                                <p class="text-[10px] text-slate-400">部材の固定<br>断面内差</p>
+                            </div>
+                            <div class="text-2xl text-slate-600">＝</div>
+                            <div class="space-y-2">
+                                <div class="w-16 h-16 rounded-full bg-red-900 flex items-center justify-center border border-red-700 animate-pulse">
+                                    <span class="text-xs font-bold">引張応力</span>
+                                </div>
+                                <p class="text-[10px] text-red-300">強度を上回ると<br>ひび割れ発生</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- 第8回 強化版 -->
+        <section id="lec08" class="lecture-section">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第8回</span>
+                <h2 class="text-3xl font-bold text-slate-800">補強材の種類と力学特性</h2>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+                
+                <!-- 0. イントロダクション -->
+                <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        コンクリートは「圧縮に強く、引張に弱い」という性質を持ちます。この弱点を補うために、引張応力が生じる箇所に補強材（主に鉄筋）を配置するのが<span class="font-bold">鉄筋コンクリート(RC)</span>の基本原理です。本回では、その補強材自体の特性とコンクリートとの相互作用を学びます。
+                    </p>
+                </div>
+
+                <!-- 1. 鉄筋の形状と種類 -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. 鉄筋の分類と形状</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-6 rounded-2xl border border-slate-100 bg-white card-shadow">
+                            <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                <span class="w-2 h-4 bg-blue-400 rounded"></span>
+                                異形鉄筋 (Deformed Bars)
+                            </h4>
+                            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                                表面に「節（ふし）」や「リブ」と呼ばれる突起を設けた鉄筋です。これにより、コンクリートとの<span class="important-term">付着性能</span>が飛躍的に向上しています。
+                            </p>
+                            <div class="bg-slate-50 p-4 rounded-xl text-center">
+                                <p class="text-[10px] text-slate-400 mb-2">JIS規格：SD295, SD345 など</p>
+                                <div class="flex justify-center gap-4">
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-32 h-4 bg-slate-300 rounded-full relative overflow-hidden">
+                                            <div class="absolute inset-0 flex justify-around items-center">
+                                                <div class="w-1 h-full bg-slate-400 rotate-12"></div>
+                                                <div class="w-1 h-full bg-slate-400 rotate-12"></div>
+                                                <div class="w-1 h-full bg-slate-400 rotate-12"></div>
+                                                <div class="w-1 h-full bg-slate-400 rotate-12"></div>
+                                            </div>
+                                        </div>
+                                        <span class="text-[10px] mt-1 italic">異形鉄筋（節あり）</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 rounded-2xl border border-slate-100 bg-white card-shadow">
+                            <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                <span class="w-2 h-4 bg-slate-400 rounded"></span>
+                                丸鋼 (Plain Bars)
+                            </h4>
+                            <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+                                表面が滑らかな円形断面の鉄筋です。付着力が弱いため、現在のRC構造物ではあまり用いられず、主にせん断補強筋の一部などに限定されます。
+                            </p>
+                            <div class="bg-slate-50 p-4 rounded-xl text-center">
+                                <p class="text-[10px] text-slate-400 mb-2">JIS規格：SR235, SR295 など</p>
+                                <div class="flex justify-center">
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-32 h-4 bg-slate-300 rounded-full"></div>
+                                        <span class="text-[10px] mt-1 italic">丸鋼（滑らか）</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 鋼材の応力－ひずみ関係 -->
+                <div class="space-y-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. 鋼材の力学特性（応力－ひずみ曲線）</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                鉄筋は明確な<span class="important-term">降伏点</span>を持つのが特徴です。設計においては、この降伏強度 $f_y$ が基準となります。
+                            </p>
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                    <span class="text-xs font-bold">ヤング係数 $E_s$</span>
+                                    <span class="text-xs font-mono">$2.0 \times 10^5 \text{ N/mm}^2$</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                    <span class="text-xs font-bold">降伏棚 (Yield Plateau)</span>
+                                    <span class="text-[10px] text-slate-500">応力が増えずにひずみだけ増大する領域</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                    <span class="text-xs font-bold">加工硬化 (Strain Hardening)</span>
+                                    <span class="text-[10px] text-slate-500">降伏後に再び応力が増大する現象</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 bg-slate-900 rounded-2xl flex flex-col items-center">
+                            <p class="text-[10px] text-slate-400 mb-4">Stress-Strain Relationship of Steel</p>
+                            <svg width="250" height="150" viewBox="0 0 250 150" class="overflow-visible">
+                                <!-- Axes -->
+                                <line x1="20" y1="130" x2="230" y2="130" stroke="white" stroke-width="1" />
+                                <line x1="20" y1="130" x2="20" y2="10" stroke="white" stroke-width="1" />
+                                <!-- Curve -->
+                                <path d="M 20 130 L 60 40 L 100 40 Q 140 40 180 20 L 210 50" fill="none" stroke="#60a5fa" stroke-width="2" />
+                                <!-- Labels -->
+                                <text x="235" y="135" fill="white" font-size="8">$\epsilon$</text>
+                                <text x="10" y="5" fill="white" font-size="8">$\sigma$</text>
+                                <text x="65" y="35" fill="#60a5fa" font-size="7">降伏点 (Yield)</text>
+                                <text x="140" y="15" fill="#60a5fa" font-size="7">引張強さ</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 付着メカニズム -->
+                <div class="space-y-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">3. 鉄筋とコンクリートの「付着」</h3>
+                    <p class="text-sm text-slate-600">
+                        鉄筋とコンクリートが一体となって荷重を分担するためには、両者の界面で滑りが生じないこと（＝付着）が必要です。付着は以下の4つの要因で構成されます。
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 bg-blue-50 rounded-xl border border-blue-100 flex flex-col">
+                            <span class="text-lg mb-2">🧪</span>
+                            <h5 class="font-bold text-xs mb-1">化学的付着</h5>
+                            <p class="text-[10px] text-slate-500">セメントペーストと鉄筋表面の化学的結合。</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-xl border border-blue-100 flex flex-col">
+                            <span class="text-lg mb-2">🧲</span>
+                            <h5 class="font-bold text-xs mb-1">摩擦抵抗</h5>
+                            <p class="text-[10px] text-slate-500">滑りに対して生じる物理的な摩擦力。</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-xl border border-blue-100 flex flex-col">
+                            <span class="text-lg mb-2">⚙️</span>
+                            <h5 class="font-bold text-xs mb-1">機械的抵抗</h5>
+                            <p class="text-[10px] text-slate-500">鉄筋表面の微細な凹凸によるひっかかり。</p>
+                        </div>
+                        <div class="p-4 bg-blue-600 rounded-xl border border-blue-700 flex flex-col text-white shadow-md">
+                            <span class="text-lg mb-2">🏗️</span>
+                            <h5 class="font-bold text-xs mb-1">機械的なかみ合わせ</h5>
+                            <p class="text-[10px] text-blue-100">異形鉄筋の「節」がコンクリートを直接押し返す強力な力。最大の要因。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-6 rounded-2xl">
+                        <h4 class="text-sm font-bold text-slate-800 mb-3 italic">付着ひび割れのメカニズム</h4>
+                        <div class="flex flex-col md:flex-row gap-6 items-center">
+                            <div class="flex-1 text-xs text-slate-600 leading-relaxed">
+                                鉄筋に強い引張力がかかると、節とコンクリートの界面に圧縮力が作用します。その反作用として、鉄筋を囲む周囲のコンクリートに<span class="text-blue-700 font-bold">周方向の引張応力（リングテンション）</span>が発生し、コンクリートが裂けるような「付着ひび割れ」が生じることがあります。
+                            </div>
+                            <div class="w-full md:w-1/3 p-4 bg-white rounded-xl border border-slate-200 text-center">
+                                <div class="inline-block relative w-12 h-12 rounded-full border-4 border-slate-200">
+                                    <div class="absolute inset-0 m-auto w-4 h-4 bg-slate-800 rounded-sm"></div>
+                                    <!-- Arrows indicating ring tension -->
+                                    <div class="absolute top-[-15px] left-1/2 -translate-x-1/2 text-blue-500 font-bold">↑</div>
+                                    <div class="absolute bottom-[-15px] left-1/2 -translate-x-1/2 text-blue-500 font-bold">↓</div>
+                                    <div class="absolute left-[-15px] top-1/2 -translate-y-1/2 text-blue-500 font-bold">←</div>
+                                    <div class="absolute right-[-15px] top-1/2 -translate-y-1/2 text-blue-500 font-bold">→</div>
+                                </div>
+                                <p class="text-[10px] mt-4 text-slate-400">断面内のリング引張応力</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. その他の補強材 (繊維・FRP) -->
+                <div class="space-y-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">4. 繊維補強と新材料</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-700">
+                                    <th class="p-3 border-b">種類</th>
+                                    <th class="p-3 border-b">主な材料</th>
+                                    <th class="p-3 border-b">主な改善機能</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr>
+                                    <td class="p-3 font-bold">鋼繊維 (SF)</td>
+                                    <td class="p-3">短い鋼線の断片</td>
+                                    <td class="p-3">靭性（粘り強さ）の向上、ひび割れ分散、曲げ強度向上</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">プラスチック繊維</td>
+                                    <td class="p-3">ポリプロピレン (PP)等</td>
+                                    <td class="p-3">初期ひび割れ抑制、爆裂防止（火災時）</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">FRP緊張材</td>
+                                    <td class="p-3">炭素繊維, アラミド繊維</td>
+                                    <td class="p-3">高引張強度、<span class="text-blue-600">耐腐食性（錆びない）</span>、軽量</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- 第9回 構成 -->
+        <section id="lec09" class="lecture-section">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第9回</span>
+                <h2 class="text-3xl font-bold text-slate-800">コンクリートの耐久性と初期欠陥</h2>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+                
+                <!-- 0. 耐久性の定義 -->
+                <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                    <h3 class="text-lg font-bold text-blue-800 mb-2">耐久性 (Durability) とは？</h3>
+                    <p class="text-sm text-slate-700 leading-relaxed">
+                        コンクリートの耐久性とは、<span class="important-term">経年劣化に対する抵抗性能</span>のことです。RC構造物では、コンクリート自体の化学的変質だけでなく、内部の「鉄筋の腐食」も耐久性を決定づける重要な因子となります。
+                    </p>
+                </div>
+
+                <!-- 1. 初期欠陥とその影響 -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. 初期欠陥：施工・供用直後の問題</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        施工不良や配合の不備によって生じる「初期欠陥」は、後の劣化を加速させる要因となります。
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- ジャンカ -->
+                        <div class="p-5 rounded-2xl border border-slate-100 bg-white card-shadow space-y-3">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-bold text-slate-800">豆板（ジャンカ）</h4>
+                                <span class="defect-badge">施工不良</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-relaxed">
+                                粗骨材が一部に集まり、ペーストが行き渡らない空隙の多い状態。材料分離や締固め不足が原因。
+                            </p>
+                            <div class="h-1 bg-blue-100 rounded-full w-full opacity-50"></div>
+                        </div>
+                        <!-- コールドジョイント -->
+                        <div class="p-5 rounded-2xl border border-slate-100 bg-white card-shadow space-y-3">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-bold text-slate-800">コールドジョイント</h4>
+                                <span class="defect-badge">打継ぎ不良</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-relaxed">
+                                先に打ち込んだ層と後に打ち込んだ層が一体化せず、不連続な面が生じる現象。
+                            </p>
+                            <div class="h-1 bg-blue-100 rounded-full w-full opacity-50"></div>
+                        </div>
+                        <!-- 表面気泡 -->
+                        <div class="p-5 rounded-2xl border border-slate-100 bg-white card-shadow space-y-3">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-bold text-slate-800">表面気泡（あばた）</h4>
+                                <span class="defect-badge">外観不良</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-relaxed">
+                                コンクリート表面に気泡が残った状態。美観を損なうだけでなく、かぶり厚さの不足を招く。
+                            </p>
+                            <div class="h-1 bg-blue-100 rounded-full w-full opacity-50"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 主要な劣化現象 -->
+                <div class="space-y-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. 代表的な劣化現象とメカニズム</h3>
+                    
+                    <!-- 中性化 -->
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="flex-1 space-y-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="p-1 bg-blue-600 rounded text-white text-[10px]">劣化1</span>
+                                    <h4 class="font-bold text-slate-800 text-lg">中性化 (Carbonation)</h4>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    空気中の $CO_2$ が浸入し、コンクリートの強アルカリ性（pH 12〜13）が失われる現象。
+                                </p>
+                                <div class="bg-white p-3 rounded-lg border border-slate-200">
+                                    <p class="text-[11px] font-mono text-blue-600">
+                                        $Ca(OH)_2 + CO_2 \rightarrow CaCO_3 + H_2O$
+                                    </p>
+                                </div>
+                                <p class="text-[11px] text-red-500 font-bold italic">
+                                    ⚠️ 鉄筋周囲が中性化すると不動態被膜が破壊され、鉄筋が腐食（錆）し始める！
+                                </p>
+                            </div>
+                            <div class="w-full md:w-64 flex flex-col items-center justify-center bg-white p-4 rounded-xl border border-slate-200">
+                                <div class="relative w-40 h-24 bg-slate-100 rounded border-2 border-slate-300">
+                                    <div class="absolute inset-0 bg-pink-100 flex items-center justify-center">
+                                        <div class="w-32 h-16 bg-pink-400 opacity-50 rounded"></div>
+                                        <span class="absolute text-[10px] text-pink-700 font-bold">フェノールフタレイン反応</span>
+                                    </div>
+                                    <div class="absolute top-0 right-0 bottom-0 w-8 bg-slate-200 border-l border-slate-400"></div>
+                                    <span class="absolute top-1/2 -right-8 -translate-y-1/2 text-[10px] text-slate-400 rotate-90">中性化領域</span>
+                                </div>
+                                <p class="text-[9px] mt-2 text-slate-400">中性化深さの測定イメージ</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 塩害 -->
+                    <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="flex-1 space-y-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="p-1 bg-blue-600 rounded text-white text-[10px]">劣化2</span>
+                                    <h4 class="font-bold text-slate-800 text-lg">塩害 (Chloride Damage)</h4>
+                                </div>
+                                <p class="text-xs text-slate-600 leading-relaxed">
+                                    外部から塩化物イオン ($Cl^-$) が浸入し、鉄筋の不動態被膜を局所的に破壊する現象。
+                                </p>
+                                <div class="grid grid-cols-2 gap-2 text-[10px]">
+                                    <div class="p-2 bg-blue-100 rounded">🌊 海水・飛来塩分</div>
+                                    <div class="p-2 bg-blue-100 rounded">❄️ 凍結防止剤</div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-64 p-4 bg-white rounded-xl border border-slate-200 flex flex-col items-center justify-center">
+                                <div class="w-40 h-8 bg-slate-400 rounded-full relative overflow-hidden">
+                                    <div class="absolute left-1/4 top-0 w-2 h-full bg-red-500 blur-[2px]"></div>
+                                    <div class="absolute left-1/2 top-0 w-3 h-full bg-red-500 blur-[3px]"></div>
+                                    <span class="absolute inset-0 flex items-center justify-center text-[10px] text-white font-bold italic">Pitting Corrosion (孔食)</span>
+                                </div>
+                                <p class="text-[9px] mt-2 text-slate-400">塩害による鉄筋の局所的な腐食</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 化学的腐食と物理的劣化 -->
+                <div class="space-y-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">3. 複合的な劣化因子</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- アルカリ骨材反応 -->
+                        <div class="p-6 bg-blue-50/30 rounded-2xl border border-blue-100 space-y-3">
+                            <h4 class="font-bold text-slate-800 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                                アルカリ骨材反応 (ASR)
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                セメント中のアルカリ成分と骨材中の反応性鉱物が反応し、吸水膨張するゲルを生成。コンクリート内部から膨張し、<span class="text-blue-700">亀甲状のひび割れ</span>を発生させる。
+                            </p>
+                        </div>
+                        <!-- 凍害 -->
+                        <div class="p-6 bg-blue-50/30 rounded-2xl border border-blue-100 space-y-3">
+                            <h4 class="font-bold text-slate-800 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                                凍害 (Frost Damage)
+                            </h4>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                コンクリート内の水分が凍結・融解を繰り返すことで体積膨張し、内部組織が徐々に破壊される。表面が鱗状に剥がれる<span class="text-blue-700">スケーリング</span>が特徴。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- まとめ・対策 -->
+                <div class="bg-slate-900 text-white p-8 rounded-2xl space-y-4">
+                    <h4 class="text-lg font-bold flex items-center gap-2">
+                        <span>🛡️</span> 耐久性を確保するための基本原則
+                    </h4>
+                    <ul class="text-sm space-y-2 opacity-90">
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-400 mt-1">●</span>
+                            <div><span class="font-bold">適切な配合設計：</span> 水セメント比を小さくし、密実な組織を作る。</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-400 mt-1">●</span>
+                            <div><span class="font-bold">かぶり厚さの確保：</span> 鉄筋を劣化因子から守るための十分なかぶり。</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-400 mt-1">●</span>
+                            <div><span class="font-bold">入念な養生：</span> 初期の水和反応を十分に進行させ、欠陥を防ぐ。</div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+        <!-- 第10回 構成 -->
+        <section id="lec10" class="lecture-section">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第10回</span>
+                <h2 class="text-3xl font-bold text-slate-800">コンクリートの耐久性：鋼材腐食・ASR</h2>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+                
+                <!-- 1. 鉄筋とコンクリートの相性（化学的要因） -->
+                <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                    <h3 class="text-lg font-bold text-blue-800 mb-3 underline decoration-blue-200 decoration-4">なぜコンクリート中の鉄筋は錆びないのか？</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-3">
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                健全なコンクリートは $Ca(OH)_2$ により <span class="important-term">pH 12.5 程度の強アルカリ性</span> に保たれています。この環境下では、鉄筋表面に数nmの非常に緻密な酸化被膜である <span class="important-term">不動態被膜</span> が形成されます。
+                            </p>
+                            <p class="text-xs text-slate-600">
+                                これにより外部からの酸素や水の供給が遮断され、腐食が抑制されます。
+                            </p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-blue-100 flex flex-col items-center justify-center">
+                            <div class="w-48 h-12 bg-slate-300 rounded-full relative overflow-hidden border-2 border-slate-400">
+                                <div class="absolute inset-0 border-[3px] border-blue-400 opacity-60 rounded-full"></div>
+                                <div class="absolute inset-0 flex items-center justify-center text-[10px] text-blue-800 font-bold">緻密な不動態被膜</div>
+                            </div>
+                            <p class="text-[9px] mt-2 text-slate-400">強アルカリ下での保護状態</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 鋼材腐食のプロセス -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. 鋼材腐食（錆）のメカニズム</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="text-blue-600 font-bold mb-1 italic">Step 1</div>
+                            <h5 class="font-bold text-sm mb-2">潜伏期</h5>
+                            <p class="text-[11px] text-slate-500">塩化物イオンや二酸化炭素が鉄筋位置まで到達する期間</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="text-blue-600 font-bold mb-1 italic">Step 2</div>
+                            <h5 class="font-bold text-sm mb-2">進展期</h5>
+                            <p class="text-[11px] text-slate-500">不動態被膜が破壊され、腐食（錆）が開始・進行する期間</p>
+                        </div>
+                        <div class="p-4 bg-red-50 rounded-xl border border-red-100">
+                            <div class="text-red-600 font-bold mb-1 italic">Step 3</div>
+                            <h5 class="font-bold text-sm mb-2 text-red-700">加速期</h5>
+                            <p class="text-[11px] text-red-600">錆の体積膨張（約2.5倍）により、かぶりコンクリートにひび割れが発生</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-6 rounded-2xl overflow-x-auto">
+                        <h4 class="text-sm font-bold mb-4 flex items-center gap-2 italic">
+                            <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span> 腐食の電気化学反応
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-2 border-l border-slate-700 pl-4">
+                                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Anode (アノード反応)</p>
+                                <p class="text-lg font-mono text-blue-300">$Fe \rightarrow Fe^{2+} + 2e^-$</p>
+                                <p class="text-[11px] text-slate-400">鉄がイオン化して溶け出す</p>
+                            </div>
+                            <div class="space-y-2 border-l border-slate-700 pl-4">
+                                <p class="text-[10px] text-slate-400 uppercase tracking-widest">Cathode (カソード反応)</p>
+                                <p class="text-lg font-mono text-red-300">$\frac{1}{2}O_2 + H_2O + 2e^- \rightarrow 2OH^-$</p>
+                                <p class="text-[11px] text-slate-400">電子を消費し、水酸化物イオンを生成</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-[10px] text-center text-slate-500 italic">※酸素と水が供給されることでこの回路が回り続ける</p>
+                    </div>
+                </div>
+
+                <!-- 3. アルカリシリカ反応 (ASR) -->
+                <div class="space-y-6 pt-4 border-t border-slate-100">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. アルカリシリカ反応 (ASR)</h3>
+                    
+                    <div class="p-6 bg-blue-50/30 rounded-2xl border border-blue-100 space-y-4">
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            セメント中のアルカリ ($Na^+, K^+$) と、骨材中の反応性シリカ鉱物が水共存下で反応し、<span class="important-term text-blue-800">アルカリシリカゲル</span> を生成します。このゲルが吸水膨張し、コンクリートを内部から破壊します。
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="reaction-step">アルカリ</span>
+                            <span class="text-slate-400">+</span>
+                            <span class="reaction-step">反応性骨材</span>
+                            <span class="text-slate-400">+</span>
+                            <span class="reaction-step">水</span>
+                            <span class="text-blue-600 font-bold mx-2">→</span>
+                            <span class="px-3 py-1 rounded-full bg-blue-600 text-white text-sm font-bold shadow-lg shadow-blue-200">膨張！</span>
+                        </div>
+                    </div>
+
+                    <!-- 膨張メカニズムの最新論争 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-5 bg-white border border-slate-200 rounded-2xl card-shadow">
+                            <div class="flex items-center gap-2 mb-3 text-slate-500">
+                                <span class="text-[10px] border border-slate-300 px-2 rounded">Model A</span>
+                                <h4 class="font-bold text-slate-800">反応リムモデル</h4>
+                            </div>
+                            <p class="text-[11px] text-slate-600 leading-relaxed">
+                                骨材の周囲にカルシウムが結合した「フタ」のような層が形成される。内部に溜まった液状の生成物がフタに阻まれ、内部圧力が上昇して膨張するという説。
+                            </p>
+                        </div>
+                        <div class="p-5 bg-white border border-slate-200 rounded-2xl card-shadow">
+                            <div class="flex items-center gap-2 mb-3 text-slate-500">
+                                <span class="text-[10px] border border-slate-300 px-2 rounded">Model B</span>
+                                <h4 class="font-bold text-slate-800">ゲルポケットモデル</h4>
+                            </div>
+                            <p class="text-[11px] text-slate-600 leading-relaxed">
+                                骨材内部の特定のスポット（ポケット）に生成物が溜まり、そこを起点として放射状にひび割れが進展するという説。観察事実に近いとされる最新のモデル。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-xl">
+                        <p class="text-xs text-amber-800 font-bold">🔍 特徴的な劣化パターン</p>
+                        <ul class="mt-2 text-[11px] text-amber-900 space-y-1">
+                            <li>・無筋構造物では「亀甲状」のひび割れ。</li>
+                            <li>・鉄筋構造物では「鉄筋に沿った」方向へのひび割れ（拘束による）。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- まとめ・対策 -->
+                <div class="bg-blue-900 text-white p-8 rounded-2xl space-y-4">
+                    <h4 class="text-lg font-bold flex items-center gap-2">
+                        <span>🛡️</span> 耐久性向上のための3つの化学的アプローチ
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                        <div class="space-y-2">
+                            <h5 class="text-blue-300 font-bold text-sm">1. 浸入阻止</h5>
+                            <p class="text-[11px] opacity-80 leading-relaxed">水セメント比 ($W/C$) を下げ、組織を緻密にすることで塩分や $CO_2$ の拡散を遅らせる。</p>
+                        </div>
+                        <div class="space-y-2">
+                            <h5 class="text-blue-300 font-bold text-sm">2. 反応抑制</h5>
+                            <p class="text-[11px] opacity-80 leading-relaxed">高炉スラグなどの混合セメントを使用し、細孔構造の改善とアルカリ濃度の低下を図る。</p>
+                        </div>
+                        <div class="space-y-2">
+                            <h5 class="text-blue-300 font-bold text-sm">3. 物理的保護</h5>
+                            <p class="text-[11px] opacity-80 leading-relaxed">設計かぶり厚さを確実に確保し、エポキシ樹脂塗装鉄筋などを用いて直接的な腐食を防ぐ。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section id="lec11" class="lecture-section max-w-5xl mx-auto">
+         <!-- ヘッダー部分 -->
+         <div class="flex items-center gap-3 mb-6">
+            <span class="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">第11回</span>
+            <h2 class="text-3xl font-bold text-slate-800">コンクリートの耐久性・劣化対策</h2>
+         </div>
+        
+         <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-12">
+            
+            <!-- 1. 疲労 (Fatigue) -->
+            <div class="space-y-6">
+                <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">1. 疲労破壊と疲労強度</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="formula-card p-6 rounded-2xl">
+                        <h4 class="font-bold text-blue-900 mb-4 text-sm">疲労強度の定義</h4>
+                        <div class="space-y-2">
+                            <p class="text-xs font-semibold">コンクリートの疲労強度:</p>
+                            <p class="text-sm">一般に<span class="text-blue-700 font-bold">200万回</span>の圧縮繰返し応力に耐えうる上限応力。</p>
+                            <p class="text-[10px] text-slate-500 mt-2">※普通強度のコンクリートでは圧縮強度の 55〜65% 程度。</p>
+                        </div>
+                    </div>
+                    <div class="formula-card p-6 rounded-2xl">
+                        <h4 class="font-bold text-blue-900 mb-4 text-sm">S-N曲線（応力-回数関係）</h4>
+                        <p class="text-xs leading-relaxed">上限応力 $S$ と破壊までの回数 $\log N$ は直線関係にある。鋼材に見られる「疲労限（それ以下なら無限に耐える値）」は、コンクリートには明確には存在しない。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 凍害 (Frost Damage) -->
+            <div class="space-y-6 pt-4 border-t border-slate-100">
+                <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">2. 凍害のメカニズム</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="mechanism-box">
+                        <h4 class="font-bold text-blue-800 text-sm">凍結融解作用</h4>
+                        <p class="text-xs text-slate-600 mt-2">
+                            水分が凍結する際の<span class="important-term">約9%の体積膨張</span>により内部圧が発生。融解と凍結の繰り返しで組織が徐々に微細ひび割れを起こし、崩壊に至る。
+                        </p>
+                    </div>
+                    <div class="mechanism-box border-blue-400">
+                        <h4 class="font-bold text-blue-800 text-sm">代表的な劣化現象</h4>
+                        <ul class="text-[11px] text-slate-600 mt-2 space-y-1 list-disc pl-4">
+                            <li><b>スケーリング:</b> 表面のペーストが剥離し、骨材が露出する。</li>
+                            <li><b>ポップアウト:</b> 骨材の膨張等により表面が円錐状に弾け飛ぶ。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 化学的侵食 (Chemical Attack) -->
+            <div class="space-y-6 pt-4 border-t border-slate-100">
+                <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">3. 化学的侵食のメカニズム</h3>
+                <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        酸や硫酸塩などの化学物質がコンクリート中の水和物（水酸化カルシウム等）と反応し、<span class="important-term">溶解</span>または<span class="important-term">膨張性物質の生成</span>（エトリンガイト等）を引き起こして組織を劣化させる。
+                    </p>
+                    <div class="mt-4 flex gap-4">
+                        <div class="flex-1 bg-white p-3 rounded-lg border border-blue-200 text-center">
+                            <p class="text-[10px] font-bold text-blue-600 mb-1">酸による侵食</p>
+                            <p class="text-[10px] text-slate-500">水和物を溶かし、断面減少を招く</p>
+                        </div>
+                        <div class="flex-1 bg-white p-3 rounded-lg border border-blue-200 text-center">
+                            <p class="text-[10px] font-bold text-blue-600 mb-1">硫酸塩による侵食</p>
+                            <p class="text-[10px] text-slate-500">膨張性物質を生成し、ひび割れを招く</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 劣化対策のまとめ -->
+            <div class="space-y-8 pt-4 border-t border-slate-100">
+                <div class="flex justify-between items-end">
+                    <h3 class="text-xl font-bold border-l-4 border-blue-600 pl-4 text-slate-800">4. 劣化対策の体系的整理</h3>
+                    <span class="text-[10px] text-slate-400">※主因に基づいた分類</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse">
+                        <thead>
+                            <tr class="border-y border-slate-200">
+                                <th class="p-3 text-blue-900 w-1/4">劣化の主因</th>
+                                <th class="p-3 text-blue-900 w-1/4">劣化現象</th>
+                                <th class="p-3 text-blue-900 w-1/2">主な具体的対策</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="p-3 font-bold text-slate-700 bg-blue-50/20" rowspan="3">環境作用<br><span class="text-[9px] font-normal">(外部因子の侵入)</span></td>
+                                <td class="p-3">鋼材腐食</td>
+                                <td class="p-3">
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li><b>低W/C:</b> 組織を緻密にして塩分・炭酸ガスの移動を抑制。</li>
+                                        <li><b>かぶり厚増大:</b> 劣化因子が鉄筋に達する時間を稼ぐ。</li>
+                                        <li><b>エポキシ鉄筋:</b> 物理的に鉄筋と環境を遮断する。</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">凍害</td>
+                                <td class="p-3">
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li><b>AE剤の使用:</b> <span class="text-blue-700 font-bold">空気量(4〜6%)</span>を確保し、膨張圧を逃がす。</li>
+                                        <li><b>吸水率の小さい骨材:</b> 骨材自体の凍結破壊を防ぐ。</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3">化学的侵食</td>
+                                <td class="p-3">
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li><b>混合セメント:</b> 高炉スラグ等を用いて化学的抵抗性を向上。</li>
+                                        <li><b>表面被覆:</b> コンクリート表面を樹脂等で守る。</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="bg-slate-50/50">
+                                <td class="p-3 font-bold text-slate-700">外力作用</td>
+                                <td class="p-3">疲労</td>
+                                <td class="p-3">
+                                    <ul class="list-disc pl-4">
+                                        <li><b>設計応力の抑制:</b> 作用する上限応力を低く抑える。</li>
+                                        <li><b>断面増厚:</b> 構造的なゆとりを持たせる。</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-slate-700">材料主因</td>
+                                <td class="p-3">アルカリシリカ反応</td>
+                                <td class="p-3">
+                                    <ul class="list-disc pl-4">
+                                        <li><b>混合セメント:</b> アルカリ濃度を抑制し、反応を防ぐ。</li>
+                                        <li><b>非反応性骨材:</b> 反応性のある骨材を使用しない。</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          </div>
+        </section>
+        </main>
+    </div>
+        </main>
+    </div>
+
+    <footer class="bg-white border-t border-slate-200 py-12">
+        <div class="container mx-auto px-6 text-center text-slate-400 text-sm">
+            <p>© 2024 材料工学 講義アーカイブ</p>
+        </div>
+    </footer>
+
+    <script>
+        // スクロール時のアクティブリンク制御
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.lecture-section');
+            const navLinks = document.querySelectorAll('.sidebar-item');
+            let current = "";
+            sections.forEach(section => {
+                if (pageYOffset >= section.offsetTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
